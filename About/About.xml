@@ -13,9 +13,9 @@
     This error is negligable when at a vertical angle of 0, 45 and 90 degrees but is a lot more pronounced around 22.5 and 67.5 degrees where you have around 6-7 degrees of difference between the expected angle and the true angle of your dish!
     While there is very little impact for the users using the computer to locate traders, if you want to automate it by triangulating the location of the ship then the difference in dish angle can throw your calculations off unless you compensate for it.
     If you want to stay vanilla, you can always just figure out the difference for each angle and make two look up tables using the stack to convert both ways, but as someone who succeeded in doing that, it's a pain and I'd rather just scrap that part of my code and have this mod.
-   
+
     The mod fixes this in the Vertical and Horizontal setters of the dish by reading the angle of the resulting transform and rotating the DishTransform.up vector towards or away from the up axis by the difference between the wanted vertical angle and the resulting vertical angle.
-    Repo:
+    Repo: https://github.com/Vespinian/stationeers-mdc
   </Description>
   <!-- Ingame Description using TMP tags for Workshop menu -->
   <!-- All contents of ChangeLog should be changed for each publication for Steam workshop page -->
@@ -47,7 +47,7 @@ While there is very little impact for the users using the computer to locate tra
 If you want to stay vanilla, you can always just figure out the difference for each angle and make two look up tables using the stack to convert both ways, but as someone who succeeded in doing that, it's a pain and I'd rather just scrap that part of my code and have this mod.
 
 The mod fixes this in the Vertical and Horizontal setters of the dish by reading the angle of the resulting transform and rotating the DishTransform.up vector towards or away from the up axis by the difference between the wanted vertical angle and the resulting vertical angle.
-Repo:
+Repo: https://github.com/Vespinian/stationeers-mdc
 ]]>
   </InGameDescription>
 </ModMetadata>
