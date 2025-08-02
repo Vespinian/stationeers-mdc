@@ -9,6 +9,12 @@
     It requires Bepinex to be installed with the StationeersLaunchPad plugin.
     See: https://github.com/StationeersLaunchPad/StationeersLaunchPad
 
+    TL;DR
+    [olist]
+    [*] Fixes medium dish not using the correct vertical angle
+    [*] Fixes wrong dish angle being used when checking angle to trader on game load.
+    [/olist]
+
     This mod fixes the medium satellite dish vertical angle which as of 8/1/2025 has an offset between the dish's vertical setting and the resulting dish's vertical angle.
     This error is negligable when at a vertical angle of 0, 45 and 90 degrees but is a lot more pronounced around 22.5 and 67.5 degrees where you have around 6-7 degrees of difference between the expected angle and the true angle of your dish!
     While there is very little impact for the users using the computer to locate traders, if you want to automate it by triangulating the location of the ship then the difference in dish angle can throw your calculations off unless you compensate for it.
@@ -16,11 +22,11 @@
 
     The mod fixes this in the Vertical and Horizontal setters of the dish by reading the angle of the resulting transform and rotating the DishTransform.up vector towards or away from the up axis by the difference between the wanted vertical angle and the resulting vertical angle.
 
-    The mod also attempts to fix the Dish vector not reflecting the settings when the game loads. You can notice this bug in vanilla when you point the dish on a trader, save, reload.
+    The mod also attempts to fix the dish vector not reflecting the saved settings when the game loads. You can notice this bug in vanilla when you point the dish on a trader, save, reload.
     Upon reload, the angle error reported will be calculated as if the dish is point directly upwards, if you move the dish by 1 degree, the game updates the dish vector to the new settings and fixes this.
-    The fix applied in this mod attaches itself to the function that derializes the save data and attempts to reconstruct the correct dish vector so it points towards the save settings instead of upwards.
+    The fix applied in this mod attaches itself to the function that derializes the save data and attempts to reconstruct the correct dish vector so it points towards the saved settings instead of upwards.
 
-Repo: https://github.com/Vespinian/stationeers-mdc
+    Repo: https://github.com/Vespinian/stationeers-mdc
   </Description>
   <!-- Ingame Description using TMP tags for Workshop menu -->
   <!-- All contents of ChangeLog should be changed for each publication for Steam workshop page -->
@@ -30,7 +36,7 @@ Repo: https://github.com/Vespinian/stationeers-mdc
     [*]Initial release
     [/list]
   </ChangeLog>
-  <!-- <WorkshopHandle></WorkshopHandle> -->
+  <WorkshopHandle>3540629846</WorkshopHandle>
   <!-- StationeersMods and BepInEx tags for Steam workshop page will be automatically added by the framework when publishing -->
   <Tags>
     <Tag>StationeersLaunchPad</Tag>
@@ -46,6 +52,10 @@ This is a Plugin Mod.
 It requires Bepinex to be installed with the StationeersLaunchPad plugin.
 See: https://github.com/StationeersLaunchPad/StationeersLaunchPad
 
+TL;DR
+* Fixes medium dish not using the correct vertical angle
+* Fixes wrong dish angle being used when checking angle to trader on game load.
+
 This mod fixes the medium satellite dish vertical angle which as of 8/1/2025 has an offset between the dish's vertical setting and the resulting dish's vertical angle.
 This error is negligable when at a vertical angle of 0, 45 and 90 degrees but is a lot more pronounced around 22.5 and 67.5 degrees where you have around 6-7 degrees of difference between the expected angle and the true angle of your dish!
 While there is very little impact for the users using the computer to locate traders, if you want to automate it by triangulating the location of the ship then the difference in dish angle can throw your calculations off unless you compensate for it.
@@ -53,9 +63,9 @@ If you want to stay vanilla, you can always just figure out the difference for e
 
 The mod fixes this in the Vertical and Horizontal setters of the dish by reading the angle of the resulting transform and rotating the DishTransform.up vector towards or away from the up axis by the difference between the wanted vertical angle and the resulting vertical angle.
 
-The mod also attempts to fix the Dish vector not reflecting the settings when the game loads. You can notice this bug in vanilla when you point the dish on a trader, save, reload.
+The mod also attempts to fix the dish vector not reflecting the saved settings when the game loads. You can notice this bug in vanilla when you point the dish on a trader, save, reload.
 Upon reload, the angle error reported will be calculated as if the dish is point directly upwards, if you move the dish by 1 degree, the game updates the dish vector to the new settings and fixes this.
-The fix applied in this mod attaches itself to the function that derializes the save data and attempts to reconstruct the correct dish vector so it points towards the save settings instead of upwards.
+The fix applied in this mod attaches itself to the function that derializes the save data and attempts to reconstruct the correct dish vector so it points towards the saved settings instead of upwards.
 
 Repo: https://github.com/Vespinian/stationeers-mdc
 ]]>
