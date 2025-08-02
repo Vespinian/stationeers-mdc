@@ -2,7 +2,7 @@
 <ModMetadata xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>Medium Satellite Correction</Name>
   <Author>Vespinian</Author>
-  <Version>1.0</Version>
+  <Version>1.1</Version>
   <!-- Steam description using steam styling tags for Steam workshop page -->
   <Description>
     This is a Plugin Mod.
@@ -31,6 +31,10 @@
   <!-- Ingame Description using TMP tags for Workshop menu -->
   <!-- All contents of ChangeLog should be changed for each publication for Steam workshop page -->
   <ChangeLog>
+    [h3]Version 1.1:[/h3]
+    [list]
+    [*]In Game Description Fix
+    [/list]
     [h3]Version 1.0:[/h3]
     [list]
     [*]Initial release
@@ -47,7 +51,7 @@
   <LoadBefore />
   <LoadAfter />
   <InGameDescription>
-    <![CDATA[<size="30"><color=#ffa500> MoreGasDisplayConsoleOptions </color></size>
+    <![CDATA[<size="30"><color=#ffa500> Medium Satellite Correction </color></size>
 This is a Plugin Mod.
 It requires Bepinex to be installed with the StationeersLaunchPad plugin.
 See: https://github.com/StationeersLaunchPad/StationeersLaunchPad
