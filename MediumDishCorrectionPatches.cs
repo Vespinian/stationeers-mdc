@@ -2,7 +2,10 @@
 using Assets.Scripts.Objects.Electrical;
 using UnityEngine;
 using Assets.Scripts.Util;
+using Assets.Scripts;
 using System;
+using Assets.Scripts.Objects.Motherboards;
+using System.Linq;
 
 
 namespace MediumDishCorrection
@@ -90,6 +93,74 @@ namespace MediumDishCorrection
                 __instance._isDirty = true;
             }
             return false;
+        }
+    }
+
+    [HarmonyPatch(typeof(SatelliteDish))]
+    [HarmonyPatch("GetMostAlignedContact")]
+    public class GetMostAlignedContactPatch
+    {
+        static bool Prefix(SatelliteDish __instance, ref TraderContact ____strongestContact, ref long ____bestContactFilterReferenceID)
+        {
+            float num = 180f;
+            TraderContact strongestContact = null;
+            for (int i = __instance.DishScannedContacts.ScannedContactData.Count - 1; i >= 0; i--)
+            {
+                ScannedContactData scannedContactData = __instance.DishScannedContacts.ScannedContactData[i];
+                if (scannedContactData != null)
+                {
+                    float lastScannedDegreeOffset = scannedContactData.LastScannedDegreeOffset;
+
+                    if ((scannedContactData.Contact.TradeData.TraderData.IdHash == ____bestContactFilterReferenceID) && (____bestContactFilterReferenceID != -1L)) {
+                        num = lastScannedDegreeOffset;
+                        strongestContact = scannedContactData.Contact;
+                    }
+                    if ((num > lastScannedDegreeOffset) && (____bestContactFilterReferenceID == -1L))
+                    {
+                        num = lastScannedDegreeOffset;
+                        strongestContact = scannedContactData.Contact;
+                    }
+                }
+            }
+            __instance.strongestSignal = (double)num;
+            ____strongestContact = strongestContact;
+            return false;
+        }
+    }
+
+
+    [HarmonyPatch(typeof(SatelliteDish))]
+    [HarmonyPatch(nameof(SatelliteDish.SetLogicValue))]
+    public class SetLogicValuePatch
+    {
+        static void Postfix(SatelliteDish __instance, LogicType logicType, double value,  ref TraderContact ____strongestContact, ref long ____bestContactFilterReferenceID)
+        {
+            if (logicType == LogicType.BestContactFilter)
+            {
+                float num = 180f;
+                TraderContact strongestContact = null;
+                for (int i = __instance.DishScannedContacts.ScannedContactData.Count - 1; i >= 0; i--)
+                {
+                    ScannedContactData scannedContactData = __instance.DishScannedContacts.ScannedContactData[i];
+                    if (scannedContactData != null)
+                    {
+                        float lastScannedDegreeOffset = scannedContactData.LastScannedDegreeOffset;
+
+                        if ((scannedContactData.Contact.TradeData.TraderData.IdHash == ____bestContactFilterReferenceID) && (____bestContactFilterReferenceID != -1L))
+                        {
+                            num = lastScannedDegreeOffset;
+                            strongestContact = scannedContactData.Contact;
+                        }
+                        if ((num > lastScannedDegreeOffset) && (____bestContactFilterReferenceID == -1L))
+                        {
+                            num = lastScannedDegreeOffset;
+                            strongestContact = scannedContactData.Contact;
+                        }
+                    }
+                }
+                __instance.strongestSignal = (double)num;
+                ____strongestContact = strongestContact;
+            }
         }
     }
 }
